@@ -1,8 +1,6 @@
 <html>
 <head>
 
-
-
 <script src="jslib/jquery/jquery-2.0.3.min.js"></script>
 
 <script src="jslib/jquery/svg/jquery.svg.min.js"></script>
@@ -20,8 +18,8 @@ $(document).ready(function() {
 
 function makeContent() {
     var c = [];
-    c.push("<div>");
-    c.push("<svg id='svgbase'>"); 
+    //c.push("<div>");
+    c.push("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' x='0' y='0' width='500px' height='100%' id='svgbase'>"); 
     c.push("<rect x='10' y='10' rx='5' ry='5' width='380' height='380' style='fill:#CCCCFF;stroke:#000099'/>");
     c.push("<text id='displayText' x='45' y='25' style='stroke:#000099;fill:#000099;font-size:14;'>Text Here</text>");
     //Orbital Cycle
@@ -49,6 +47,8 @@ function makeContent() {
     c.push("<path d='M200,200 L200,300 ' fill='red' stroke='red' stroke-width='2'></path>"); 
     c.push("</g>");          
     c.push("</svg>"); 
+	//c.push("</div>");
+//console.log(c.join(''));
     
     $("body").html(c.join(""));
 }
@@ -85,17 +85,17 @@ function drawInitial(SVGDocument){
     if (daym<10) daym="0" + daym;
     if (mins<10) mins = "0" + mins;
     
-    var startOfDay = new Date((month + 1) + "-" + daym + "-" + year + " 00:00");
+    var startOfDay = new Date((month + 1) + "/" + daym + "/" + year + " 00:00");
     
     //astronomical or calendrical
     var lastNewMoon = getMoonDate(rightNow,1);
     var nextNewMoon = getMoonDate(rightNow,0);
-    
-    var lastSolstice = new Date("12-22-" + (year-1));
-    var nextSolstice = new Date("12-22-" + year);
+ 
+    var lastSolstice = new Date("12/22/" + (year-1));
+    var nextSolstice = new Date("12/22/" + year);
     //account for last days of calendar year
     if(rightNow > nextSolstice) lastSolstice = nextSolstice;
-    
+      
     
     var lastSunday = startOfDay;
     var i = lastSunday.getDay();
@@ -115,7 +115,7 @@ function drawInitial(SVGDocument){
     
     //((today - last winter solstice) / 365.25) * 360
     orangeDegrees = (((rightNow - lastSolstice) / 86400000) / 365.25) * 360;
-    
+ console.log( rightNow, lastSolstice,  orangeDegrees);    
     //((today - last new moon) / (next new moon - last new moon)) * 360
     blueDegrees = (
       ((rightNow - lastNewMoon) / 86400000)
@@ -131,7 +131,7 @@ function drawInitial(SVGDocument){
     
     
     textDisplayNode.nodeValue = displayDate + "  " + displayTime;
-    
+
     orangePointer.setAttribute("transform","rotate(" + orangeDegrees + " 200,200)");
     bluePointer.setAttribute("transform","rotate(" + blueDegrees + " 200,200)");
     greenPointer.setAttribute("transform","rotate(" + greenDegrees + " 200,200)");
@@ -258,8 +258,20 @@ function drawInitial(SVGDocument){
         "9/13/2015 06:41",
         "10/13/2015 00:06",
         "11/11/2015 17:47",
-        "12/11/2015 10:29"
-
+		"12/11/2015 10:29",
+		"1/10/2016 01:30",
+		"2/08/2016 14:39",
+		"3/09/2016 01:54",
+		"4/07/2016 11:24",
+		"5/06/2016 19:29",
+		"6/05/2016 03:00",
+		"7/04/2016 11:01",
+		"8/02/2016 20:44",
+		"9/01/2016 09:03",
+		"10/01/2016 00:11",
+		"10/30/2016 17:38",
+		"11/29/2016 12:18",
+		"12/29/2016 06:53"
         );
     
     
